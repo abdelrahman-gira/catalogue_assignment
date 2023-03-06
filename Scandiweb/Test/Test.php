@@ -2,7 +2,6 @@
 
 namespace App\Code\Scandiweb\Test;
 
-
-class Test {
-    
+class Test
+{
 }

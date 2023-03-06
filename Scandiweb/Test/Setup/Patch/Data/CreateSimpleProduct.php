@@ -2,24 +2,22 @@
 
 namespace Scandiweb\Test\Setup\Patch\Data;
 
-use \Magento\Catalog\Api\CategoryLinkManagementInterface;
-use \Magento\Catalog\Api\Data\ProductInterfaceFactory;
-use \Magento\Catalog\Api\ProductRepositoryInterface;
-use \Magento\Catalog\Model\Product;
-use \Magento\Catalog\Model\Product\Attribute\Source\Status;
-use \Magento\Catalog\Model\Product\Type;
-use \Magento\Catalog\Model\Product\Visibility;
-use \Magento\Eav\Setup\EavSetup;
-use \Magento\Framework\App\State;
-use \Magento\Framework\Setup\ModuleDataSetupInterface;
-use \Magento\Framework\Setup\Patch\DataPatchInterface;
-use \Magento\Store\Model\StoreManagerInterface;
-use \Magento\InventoryApi\Api\Data\SourceItemInterface;
-use \Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
-use \Magento\InventoryApi\Api\SourceItemsSaveInterface;
+use Magento\Catalog\Api\CategoryLinkManagementInterface;
+use Magento\Catalog\Api\Data\ProductInterfaceFactory;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Catalog\Model\Product;
+use Magento\Catalog\Model\Product\Attribute\Source\Status;
+use Magento\Catalog\Model\Product\Type;
+use Magento\Catalog\Model\Product\Visibility;
+use Magento\Eav\Setup\EavSetup;
+use Magento\Framework\App\State;
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
+use Magento\InventoryApi\Api\SourceItemsSaveInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
-class CreateSimpleProduct Implements \Magento\Framework\Setup\Patch\DataPatchInterface {
-
+class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInterface
+{
     protected ModuleDataSetupInterface $setup;
 
     protected ProductInterfaceFactory $productInterfaceFactory;
@@ -28,7 +26,7 @@ class CreateSimpleProduct Implements \Magento\Framework\Setup\Patch\DataPatchInt
 
     protected State $appState;
 
-	protected EavSetup $eavSetup;
+    protected EavSetup $eavSetup;
 
     protected StoreManagerInterface $storeManager;
 
@@ -47,19 +45,19 @@ class CreateSimpleProduct Implements \Magento\Framework\Setup\Patch\DataPatchInt
         State $appState,
         StoreManagerInterface $storeManager,
         EavSetup $eavSetup,
-		SourceItemInterfaceFactory $sourceItemFactory,
+        SourceItemInterfaceFactory $sourceItemFactory,
         SourceItemsSaveInterface $sourceItemsSaveInterface,
-		CategoryLinkManagementInterface $categoryLink
+        CategoryLinkManagementInterface $categoryLink
     ) {
         $this->appState = $appState;
         $this->productInterfaceFactory = $productInterfaceFactory;
         $this->productRepository = $productRepository;
         $this->setup = $setup;
-		$this->eavSetup = $eavSetup;
+        $this->eavSetup = $eavSetup;
         $this->storeManager = $storeManager;
         $this->sourceItemFactory = $sourceItemFactory;
         $this->sourceItemsSaveInterface = $sourceItemsSaveInterface;
-		$this->categoryLink = $categoryLink;
+        $this->categoryLink = $categoryLink;
     }
 
     public function apply()
@@ -89,12 +87,18 @@ class CreateSimpleProduct Implements \Magento\Framework\Setup\Patch\DataPatchInt
         $this->categoryLink->assignProductToCategories($product->getSku(), [2]);
     }
 
-    public function getAliases() {
+    public function getAliases()
+    {
         return [];
     }
-    public static function getDependencies() {
+    public static function getDependencies()
+    {
         return [];
     }
-    public function revert() {}
-    public function getVersion() {}
+    public function revert()
+    {
+    }
+    public function getVersion()
+    {
+    }
 }
