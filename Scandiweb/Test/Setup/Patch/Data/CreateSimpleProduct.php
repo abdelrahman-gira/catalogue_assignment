@@ -20,26 +20,67 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInterface
 {
+    /**
+     * @var ModuleDataSetupInterface
+     */
     protected ModuleDataSetupInterface $setup;
 
+    /**
+     * @var ProductInterfaceFactory
+     */
     protected ProductInterfaceFactory $productInterfaceFactory;
 
+    /**
+     * @var ProductRepositoryInterface
+     */
     protected ProductRepositoryInterface $productRepository;
 
+    /**
+     * @var State
+     */
     protected State $appState;
 
+    /**
+     * @var EavSetup
+     */
     protected EavSetup $eavSetup;
 
+    /**
+     * @var StoreManagerInterface
+     */
     protected StoreManagerInterface $storeManager;
 
+    /**
+     * @var SourceItemInterfaceFactory
+     */
     protected SourceItemInterfaceFactory $sourceItemFactory;
 
+    /**
+     * @var SourceItemsSaveInterface
+     */
     protected SourceItemsSaveInterface $sourceItemsSaveInterface;
 
+    /**
+     * @var CategoryLinkManagementInterface
+     */
     protected CategoryLinkManagementInterface $categoryLink;
 
+    /**
+     * @var array
+     */
     protected array $sourceItems = [];
 
+    /**
+     * @param ModuleDataSetupInterface $setup
+     * @param ProductInterfaceFactory $productInterfaceFactory
+     * @param ProductRepositoryInterface $productRepository
+     * @param State $appState
+     * @param StoreManagerInterface $storeManager
+     * @param EavSetup $eavSetup
+     * @param SourceItemInterfaceFactory $sourceItemFactory
+     * @param SourceItemsSaveInterface $sourceItemsSaveInterface
+     * @param CategoryLinkManagementInterface $categoryLink
+     */
     public function __construct(
         ModuleDataSetupInterface $setup,
         ProductInterfaceFactory $productInterfaceFactory,
@@ -62,11 +103,17 @@ class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInt
         $this->categoryLink = $categoryLink;
     }
 
+    /**
+     * @return void
+     */
     public function apply()
     {
         $this->appState->emulateAreaCode('adminhtml', [$this, 'execute']);
     }
 
+    /**
+     * @return void
+     */
     public function execute()
     {
         $product = $this->productInterfaceFactory->create();
@@ -89,18 +136,19 @@ class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInt
         $this->categoryLink->assignProductToCategories($product->getSku(), [2]);
     }
 
+    /**
+     * @return array
+     */
     public function getAliases()
     {
         return [];
     }
+
+    /**
+     * @return array
+     */
     public static function getDependencies()
     {
         return [];
-    }
-    public function revert()
-    {
-    }
-    public function getVersion()
-    {
     }
 }
