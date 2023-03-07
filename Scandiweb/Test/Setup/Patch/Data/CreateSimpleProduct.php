@@ -17,8 +17,9 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
 use Magento\InventoryApi\Api\SourceItemsSaveInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
 
-class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInterface
+class CreateSimpleProduct implements DataPatchInterface
 {
     /**
      * @var ModuleDataSetupInterface
