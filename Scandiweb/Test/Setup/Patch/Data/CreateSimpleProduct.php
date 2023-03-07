@@ -133,6 +133,15 @@ class CreateSimpleProduct implements \Magento\Framework\Setup\Patch\DataPatchInt
             ->setStatus(Status::STATUS_ENABLED);
 
         $product = $this->productRepository->save($product);
+
+        $sourceItem = $this->sourceItemFactory->create();
+        $sourceItem->setSourceCode('default');
+        $sourceItem->setQuantity(10);
+        $sourceItem->setSku($product->getSku());
+        $sourceItem->setStatus(SourceItemInterface::STATUS_IN_STOCK);
+        $this->sourceItems[] = $sourceItem;
+        $this->sourceItemsSaveInterface->execute($this->sourceItems);
+
         $this->categoryLink->assignProductToCategories($product->getSku(), [2]);
     }
 
